@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS - Appearance</title>
+    <style>
+        :root {
+            --line : #9083bd;
+        }
+
+        body {
+            font-family:sans-serif;
+        }
+
+        input, select, textarea, button {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            vertical-align: middle;
+        }
+ 
+        input[type=search] {
+            height:32px;
+            border:1px solid var(--line);
+            border-radius:8px;
+            padding-left:8px;
+        }
+
+        input[type=search]::-webkit-search-cancel-button { 
+            appearance: none;
+            width:16px;
+            height:16px;
+            border-radius:50%;
+            cursor:pointer;
+            background:url('./svg/close_fill.svg') no-repeat center center/contain;
+        }
+
+        input[type=checkbox] {
+            background:url('./svg/checkbox_off.svg') no-repeat center center/contain;
+            width:20px;
+            height:20px;  
+        }
+
+        input[type=checkbox]:checked {
+            background-image:url('./svg/checkbox_on.svg');
+        }
+
+        input[type=radio] {
+            background:url('./svg/radio_off.svg') no-repeat center center/contain;
+            width:20px;
+            height:20px; 
+        }
+
+        input[type=radio]:checked {
+            background-image:url('./svg/radio_on.svg');
+        }
+
+        select {
+            background:url('./svg/arrow_b.svg') no-repeat right 5px center/15px;
+            padding:2px 30px 2px 6px;
+            border-radius:3px;
+            border-color:var(--line);
+            height:32px;
+            min-width:200px;
+            color:inherit;
+            font-size:inherit;
+        }
+       
+        .file1 {
+            font-size:14px; 
+            color:var(--line);
+        }
+ 
+        .file1::-webkit-file-upload-button,
+        .file1::file-selector-button {
+            background-color:var(--line);
+            color:#fff;
+            height:32px;
+            border-radius:8px;
+            border:none;
+            padding:0 20px;
+            font-size:12px;
+            text-transform:uppercase;
+            cursor:pointer;
+        }
+
+        .blind {
+            position: absolute;
+            clip: rect(0 0 0 0);
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            overflow: hidden; 
+        }
+
+        .file-box label {
+            background-color:var(--line);
+            color:#fff; 
+            border-radius:8px;
+            border:none;
+            padding:10px 20px;
+            font-size:12px;
+            text-transform:uppercase;
+            cursor:pointer;
+            display:inline-block;
+        }
+
+        .file-box p {
+            display:inline-block;
+            font-size:14px; 
+            color:var(--line);
+        }
+
+       
+    </style>
+</head>
+<body>
+     <input type="text"><hr>
+     <input type="search" placeholder="searchbox"><hr>
+     <input type="checkbox">Check box <hr>
+     <input type="radio" name="radio">Radio 1
+     <input type="radio" name="radio">Radio 2<hr>
+     <select>
+        <option>Select 1</option>
+        <option>Select 2</option>
+     </select><hr>
+     <textarea>Textarea</textarea><hr>
+     <button>BUTTON</button><hr>
+     <input type="file" class="file1">
+
+     <hr>
+     <div class="file-box">
+        <input type="file" id="file" class="blind">
+        <label for="file">파일업로드</label>
+        <p id="filename">선택된 파일이 없습니다.</p>
+     </div>
+
+     <script>
+        file.addEventListener('change', (e) => {
+            let value = e.target.value.split('\\')
+            filename.textContent = value[value.length - 1]; 
+        })
+
+        // devtools.inspector.showAllAnonymousContent
+     </script>
+</body>
+</html>

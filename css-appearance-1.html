@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * { margin:0;padding:0;list-style:none; box-sizing:border-box}
+        :root {
+            --line : #9eacd7;
+            --primary : #6a68d0;
+        }
+        body {
+            width:100%;height:100vh;
+            background-color:#ced7de;
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            font-family:sans-serif;
+            gap:30px;
+            padding:50px; 
+        }
+
+        h1 {
+            text-align:center;
+            flex-basis:100%;
+            padding:20px 0;
+        }
+      
+        h2 {
+            font-size:16px;
+            text-align:center;
+            padding:14px 0;
+        }
+
+        .blind { 
+            position: absolute;
+            clip: rect(0 0 0 0);
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            overflow: hidden; 
+        }
+
+       .box {
+        border:1px solid var(--line);
+        border-radius:20px;
+        padding:10px;
+        flex:1;
+        
+       }
+
+       .none {
+           input,select,textarea,button {
+             appearance: none;
+           }
+       }
+
+       li { 
+        border-top:1px solid var(--line);
+        padding:20px 0;
+       }
+
+       .change input, .change select, .change textarea,
+       .change button
+       { appearance: none;}
+     
+       .change input[type=search]::-webkit-search-cancel-button {
+            position:relative;  
+            appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius:50%;
+            background: url('./svg/search_close.svg') no-repeat center center/auto 70%;
+        } 
+
+        .change input[type=checkbox],
+        .change input[type=radio] {
+            width:20px;
+            height:20px;
+            background:no-repeat center center/contain;
+            vertical-align: middle;
+            margin-right:8px;
+        }
+
+        .change input[type=checkbox] {
+            background-image:url('./svg/checkbox_off.svg');
+        }
+        .change input[type=checkbox]:checked {
+            background-image:url('./svg/checkbox_on.svg');
+        }
+ 
+        .change input[type=radio] {
+            background-image:url('./svg/radio_off.svg');
+        }
+
+        .change input[type=radio]:checked {
+            background-image:url('./svg/radio_on.svg');
+        } 
+ 
+        .change select {
+            background:url('./svg/arrow_b.svg') no-repeat right 5px center/auto 70%;
+            padding:2px 30px 2px 2px;
+        }
+
+        .change .file {
+            background-color:var(--primary);
+            color:#fff;
+            display:inline-block;
+            padding:10px 20px;
+            border-radius:8px;
+            margin-bottom:10px;
+        }
+        
+        .change #filename {
+            color:var(--primary)
+        }
+    </style>
+</head>
+<body>
+    <h1>Appearance 다루기 및 상속문제</h1> 
+    <div class="box">
+        <h2>Normal</h2>
+        <ul>
+            <li>
+                <input type="text" value="text field">
+            </li>
+            <li>
+                <input type="search" value="search field">
+            </li> 
+            <li> 
+                <input type="checkbox"><span>checkbox</span> 
+            </li>
+            <li>
+                <input type="radio" name="radio"><span>radio</span>
+                <input type="radio" name="radio"><span>radio</span>
+            </li>
+            <li>
+                <select>
+                    <option>select 1</option>
+                    <option>select 2</option>
+                </select>
+            </li>
+            <li>
+                <textarea>textarea</textarea>
+            </li>
+            <li>
+                <button>BUTTON</button>
+            </li>
+            <li>
+                <input type="file" id="file1">
+                <label for="file1">Choose File</label>   
+            </li>
+        </ul>
+    </div>
+    <div class="box">
+        <h2>Change CSS</h2>
+        <ul class="change">
+            <li>
+                <input type="text" value="text field">
+            </li>
+            <li>
+                <input type="search" value="search field">
+            </li>
+            <li> 
+                <input type="checkbox"><span>checkbox</span> 
+            </li>
+            <li>
+                <input type="radio" name="radio"><span>radio</span>
+                <input type="radio" name="radio"><span>radio</span>
+            </li>
+            <li>
+                <select>
+                    <option>select 1</option>
+                    <option>select 2</option>
+                </select>
+            </li>
+            <li>
+                <textarea>textarea</textarea>
+            </li>
+            <li>
+                <button>BUTTON</button>
+            </li> 
+            <li>
+                <input type="file" class="blind" id="file2">
+                <label for="file2" class="file">Choose File</label>   
+                <p id="filename">No file chosen</p>
+            </li>
+        </ul>
+    </div> 
+
+    <script> 
+        file2.addEventListener('change', (e) => {
+            filename.textContent = e.target.value;
+        })
+    </script>
+
+</body>
+</html>
